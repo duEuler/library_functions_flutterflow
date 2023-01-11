@@ -18,7 +18,7 @@ https://www.youtube.com/@dueuler
    *** Valores especiais para quem fechar pacote ou mensalidade.
 
 Entre em contato pelo WhatsApp <b>+55 (37)9 3618-6277</b> e trate com <b>Euler</b>.<br>
-Visite <a href="https://www.dueuler.com">www.duEuler.com</a>
+<b>Visite <a href="https://www.dueuler.com">www.duEuler.com</a></b>
 
 ## Começando
 
