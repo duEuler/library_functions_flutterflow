@@ -6,7 +6,7 @@ Este projeto foi desenvolvido em FlutterFlow por <b>Euler Magalhães Junior</b>,
 <b>** Para participar do nosso grupo de WhatsApp visite o link abaixo:</b><br>
 https://chat.whatsapp.com/IVaSwd4cSp9LsMVLzSHADv
 
-</b>** Participe dos nossos treinamentos on-line gratuitos pelo YouTube:</b><br>
+<b>** Participe dos nossos treinamentos on-line gratuitos pelo YouTube:</b><br>
 https://www.youtube.com/@dueuler
 
 <b>Oferecemos serviços personalizados</b>, procuramos solucionar problemas em seus aplicativos ou implementar tecnologias complexas que necessitam de um profissional especializado.
