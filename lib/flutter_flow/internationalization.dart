@@ -157,6 +157,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Tabela local',
       'en': 'Local Table',
     },
+    'w1f86g3b': {
+      'pt': 'Geo Fire',
+      'en': '',
+    },
     '45g7slgn': {
       'pt':
           'Sempre que adicionar exemplos a sua página, não esqueça de adicionar aqui também para que todos possam visualziar.',
@@ -339,51 +343,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     '9tynkmrn': {
-      'pt': 'Localizar',
+      'pt': 'Tabela',
       'en': '',
     },
-    '97jmqt2c': {
-      'pt': 'Localização',
+    'ucgp1si7': {
+      'pt': 'Adicionar',
       'en': '',
     },
-    'y7dus40h': {
-      'pt': '0.1',
-      'en': '',
-    },
-    'vw69pqpz': {
-      'pt': '0.3',
-      'en': '',
-    },
-    'bjjgg7yn': {
-      'pt': '0.5',
-      'en': '',
-    },
-    '3vzbday6': {
-      'pt': '1',
-      'en': '',
-    },
-    'soxc97f9': {
-      'pt': '5',
-      'en': '',
-    },
-    'bttgovq8': {
-      'pt': '10',
-      'en': '',
-    },
-    'qt9iyitb': {
-      'pt': '50',
-      'en': '',
-    },
-    'n3rabzuy': {
-      'pt': 'Distancia',
-      'en': '',
-    },
-    '3fcb5aa4': {
-      'pt': 'Exibir na consulta',
-      'en': '',
-    },
-    'gtzndw8a': {
-      'pt': 'Ver mapa',
+    '1ckd9249': {
+      'pt':
+          'Usamos a tabela \"usuarios\" como modelo de uso para o GeoFire. Você precisa cadastrar endereços próximos para ativar o filtro. \n\nUse o botão preto para definir o centro do mapa, este endereço será usado para realizar a busca do raio.\n\nVocê pode definir um endereço especifico na página GeoFirePoints usando o Place, em seguida clique no disquete para salvar a posição.',
       'en': '',
     },
     '7t1h26mg': {

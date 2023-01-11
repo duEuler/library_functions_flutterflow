@@ -526,6 +526,39 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                           Padding(
                             padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                context.pushNamed('dueuler_geofire');
+                              },
+                              text: FFLocalizations.of(context).getText(
+                                'w1f86g3b' /* Geo Fire */,
+                              ),
+                              icon: Icon(
+                                Icons.video_settings_outlined,
+                                size: 15,
+                              ),
+                              options: FFButtonOptions(
+                                width: double.infinity,
+                                height: 40,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
                                 EdgeInsetsDirectional.fromSTEB(15, 50, 15, 0),
                             child: Text(
                               FFLocalizations.of(context).getText(

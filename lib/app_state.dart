@@ -104,7 +104,7 @@ class FFAppState extends ChangeNotifier {
     _geoFireIdRefConsulta = _value;
   }
 
-  double _geoFireDistancia = 0.0;
+  double _geoFireDistancia = 0.5;
   double get geoFireDistancia => _geoFireDistancia;
   set geoFireDistancia(double _value) {
     _geoFireDistancia = _value;

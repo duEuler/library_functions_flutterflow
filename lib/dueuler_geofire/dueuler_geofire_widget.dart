@@ -1,7 +1,7 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../components/dueule_geo_fire_map_widget.dart';
 import '../components/dueuler_edit_usuario_widget.dart';
-import '../flutter_flow/flutter_flow_drop_down.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_place_picker.dart';
@@ -15,6 +15,8 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -30,22 +32,66 @@ class DueulerGeofireWidget extends StatefulWidget {
   _DueulerGeofireWidgetState createState() => _DueulerGeofireWidgetState();
 }
 
-class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget> {
+class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'googleMapOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+    'columnOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0,
+          end: 1,
+        ),
+      ],
+    ),
+  };
   DocumentReference? idRefCnsultaButton;
+  UsuariosRecord? idrefusuario;
   DocumentReference? idRefConsultaSlide;
   double? sliderValue;
-  var placePickerValue1 = FFPlace();
+  var placePickerValue = FFPlace();
   LatLng? googleMapsCenter;
   final googleMapsController = Completer<GoogleMapController>();
-  DocumentReference? retornoIdRefConsulta;
-  String? dropDownValue;
-  var placePickerValue2 = FFPlace();
+  DocumentReference? idRefConsultaEntrada;
   final _unfocusNode = FocusNode();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (widget.idrefconsulta != null) {
+        idRefConsultaEntrada = await actions.dueulerGeoFireQuery(
+          FFAppState().geoFireStarLocation!,
+          valueOrDefault<double>(
+            functions.strToDouble(FFAppState().geoFireDistancia.toString()),
+            0.0,
+          ),
+          'usuarios',
+        );
+        FFAppState().update(() {
+          FFAppState().geoFireIdRefConsulta = idRefConsultaEntrada;
+        });
+        return;
+      }
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -91,7 +137,22 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget> {
                 fontSize: 22,
               ),
         ),
-        actions: [],
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.refresh_outlined,
+              color: FlutterFlowTheme.of(context).primaryBtnText,
+              size: 30,
+            ),
+            onPressed: () async {
+              context.pushNamed('dueuler_geofire');
+            },
+          ),
+        ],
         centerTitle: false,
         elevation: 2,
       ),
@@ -121,7 +182,7 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget> {
                           ),
                           Tab(
                             text: FFLocalizations.of(context).getText(
-                              '9tynkmrn' /* Localizar */,
+                              '9tynkmrn' /* Tabela */,
                             ),
                           ),
                         ],
@@ -129,487 +190,251 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget> {
                       Expanded(
                         child: TabBarView(
                           children: [
-                            Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 15, 0, 15),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      if (FFAppState().geoFireStarLocation !=
-                                          null)
-                                        Expanded(
-                                          child: AutoSizeText(
-                                            FFAppState()
-                                                .geoFireStarLocation!
-                                                .toString(),
-                                            maxLines: 2,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                        ),
-                                      FlutterFlowPlacePicker(
-                                        iOSGoogleMapsApiKey: '',
-                                        androidGoogleMapsApiKey: '',
-                                        webGoogleMapsApiKey: '',
-                                        onSelect: (place) async {
-                                          setState(
-                                              () => placePickerValue1 = place);
-                                        },
-                                        defaultText: '',
-                                        icon: Icon(
-                                          Icons.place,
-                                          color: Colors.white,
-                                          size: 16,
-                                        ),
-                                        buttonOptions: FFButtonOptions(
-                                          width: 40,
-                                          height: 40,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Colors.white,
-                                                  ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Text(
-                                  FFAppState().geoFireDistancia > 0.0
-                                      ? '${FFAppState().geoFireDistancia.toString()} KM de circunferência'
-                                      : 'Defina uma distancia...',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                                Slider(
-                                  activeColor:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                  inactiveColor: Color(0xFF9E9E9E),
-                                  min: 0,
-                                  max: 2,
-                                  value: sliderValue ??= 0.5,
-                                  divisions: 20,
-                                  onChanged: (newValue) async {
-                                    newValue = double.parse(
-                                        newValue.toStringAsFixed(4));
-                                    setState(() => sliderValue = newValue);
-                                    var _shouldSetState = false;
-                                    FFAppState().update(() {
-                                      FFAppState().geoFireDistancia =
-                                          sliderValue!;
-                                    });
-                                    if (sliderValue! > 0.0) {
-                                      idRefConsultaSlide =
-                                          await actions.dueulerGeoFireQuery(
-                                        FFAppState().geoFireStarLocation!,
-                                        valueOrDefault<double>(
-                                          functions.strToDouble(FFAppState()
-                                              .geoFireDistancia
-                                              .toString()),
-                                          0.0,
-                                        ),
-                                        'usuarios',
-                                      );
-                                      _shouldSetState = true;
-
-                                      context.pushNamed(
-                                        'dueuler_geofire',
-                                        queryParams: {
-                                          'idrefconsulta': serializeParam(
-                                            idRefConsultaSlide,
-                                            ParamType.DocumentReference,
-                                          ),
-                                        }.withoutNulls,
-                                      );
-
-                                      if (_shouldSetState) setState(() {});
-                                      return;
-                                    } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text(
-                                                'Sua posição inicial foi atualizada. Informe uma distancia para continuar.'),
-                                            content: Text(FFAppState()
-                                                .geoFireStarLocation!
-                                                .toString()),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    }
-
-                                    if (_shouldSetState) setState(() {});
-                                  },
-                                ),
-                                StreamBuilder<List<UsuariosRecord>>(
-                                  stream: queryUsuariosRecord(
-                                    queryBuilder: (usuariosRecord) =>
-                                        usuariosRecord
-                                            .where('status_ativo',
-                                                isEqualTo: true)
-                                            .orderBy('nome'),
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<UsuariosRecord>
-                                        listViewUsuariosRecordList =
-                                        snapshot.data!;
-                                    return ListView.builder(
-                                      padding: EdgeInsets.zero,
-                                      primary: false,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount:
-                                          listViewUsuariosRecordList.length,
-                                      itemBuilder: (context, listViewIndex) {
-                                        final listViewUsuariosRecord =
-                                            listViewUsuariosRecordList[
-                                                listViewIndex];
-                                        return Container(
-                                          width: 100,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                          ),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 30,
-                                                    borderWidth: 1,
-                                                    buttonSize: 60,
-                                                    icon: Icon(
-                                                      Icons
-                                                          .delete_forever_sharp,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      size: 30,
-                                                    ),
-                                                    onPressed: () async {
-                                                      var confirmDialogResponse =
-                                                          await showDialog<
-                                                                  bool>(
-                                                                context:
-                                                                    context,
-                                                                builder:
-                                                                    (alertDialogContext) {
-                                                                  return AlertDialog(
-                                                                    title: Text(
-                                                                        'Deseja remover?'),
-                                                                    actions: [
-                                                                      TextButton(
-                                                                        onPressed: () => Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            false),
-                                                                        child: Text(
-                                                                            'Não'),
-                                                                      ),
-                                                                      TextButton(
-                                                                        onPressed: () => Navigator.pop(
-                                                                            alertDialogContext,
-                                                                            true),
-                                                                        child: Text(
-                                                                            'Remover'),
-                                                                      ),
-                                                                    ],
-                                                                  );
-                                                                },
-                                                              ) ??
-                                                              false;
-                                                      if (confirmDialogResponse) {
-                                                        await listViewUsuariosRecord
-                                                            .reference
-                                                            .delete();
-                                                      }
-                                                    },
-                                                  ),
-                                                  FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 30,
-                                                    borderWidth: 1,
-                                                    buttonSize: 60,
-                                                    icon: Icon(
-                                                      Icons.edit_sharp,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 30,
-                                                    ),
-                                                    onPressed: () async {
-                                                      await showModalBottomSheet(
-                                                        isScrollControlled:
-                                                            true,
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        enableDrag: false,
-                                                        context: context,
-                                                        builder: (context) {
-                                                          return Padding(
-                                                            padding:
-                                                                MediaQuery.of(
-                                                                        context)
-                                                                    .viewInsets,
-                                                            child: Container(
-                                                              height: 200,
-                                                              child:
-                                                                  DueulerEditUsuarioWidget(
-                                                                idrefusuario:
-                                                                    listViewUsuariosRecord
-                                                                        .reference,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ).then((value) =>
-                                                          setState(() {}));
-                                                    },
-                                                  ),
-                                                  Expanded(
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(10,
-                                                                      0, 0, 0),
-                                                          child: Text(
-                                                            listViewUsuariosRecord
-                                                                .nome!,
-                                                            maxLines: 2,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 16,
-                                                                ),
-                                                          ),
+                            SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 15, 0, 15),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        if (FFAppState().geoFireStarLocation !=
+                                            null)
+                                          Expanded(
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(10, 0, 0, 0),
+                                              child: AutoSizeText(
+                                                FFAppState()
+                                                    .geoFireStarLocation!
+                                                    .toString(),
+                                                textAlign: TextAlign.center,
+                                                maxLines: 2,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 12,
                                                         ),
-                                                        if (listViewUsuariosRecord
-                                                                .local !=
-                                                            null)
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        10,
-                                                                        0,
-                                                                        0,
-                                                                        0),
-                                                            child: Text(
-                                                              listViewUsuariosRecord
-                                                                  .local!
-                                                                  .toString(),
-                                                              maxLines: 2,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Poppins',
-                                                                    fontSize:
-                                                                        13,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .normal,
-                                                                  ),
-                                                            ),
-                                                          ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  FlutterFlowIconButton(
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderRadius: 30,
-                                                    borderWidth: 1,
-                                                    buttonSize: 60,
-                                                    icon: Icon(
-                                                      Icons.my_location_sharp,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      size: 30,
-                                                    ),
-                                                    onPressed: () async {
-                                                      FFAppState().update(() {
-                                                        FFAppState()
-                                                                .geoFireStarLocation =
-                                                            listViewUsuariosRecord
-                                                                .local;
-                                                      });
-                                                      if (sliderValue! > 0.0) {
-                                                        FFAppState().update(() {
-                                                          FFAppState()
-                                                                  .geoFireDistancia =
-                                                              sliderValue!;
-                                                        });
-                                                        idRefCnsultaButton =
-                                                            await actions
-                                                                .dueulerGeoFireQuery(
-                                                          FFAppState()
-                                                              .geoFireStarLocation!,
-                                                          valueOrDefault<
-                                                              double>(
-                                                            functions.strToDouble(
-                                                                FFAppState()
-                                                                    .geoFireDistancia
-                                                                    .toString()),
-                                                            0.0,
-                                                          ),
-                                                          'usuarios',
-                                                        );
-
-                                                        context.pushNamed(
-                                                          'dueuler_geofire',
-                                                          queryParams: {
-                                                            'idrefconsulta':
-                                                                serializeParam(
-                                                              idRefConsultaSlide,
-                                                              ParamType
-                                                                  .DocumentReference,
-                                                            ),
-                                                          }.withoutNulls,
-                                                        );
-                                                      } else {
-                                                        await showDialog(
-                                                          context: context,
-                                                          builder:
-                                                              (alertDialogContext) {
-                                                            return AlertDialog(
-                                                              title: Text(
-                                                                  'Sua posição inicial foi atualizada. Informe uma distancia para continuar.'),
-                                                              content: Text(
-                                                                  FFAppState()
-                                                                      .geoFireStarLocation!
-                                                                      .toString()),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext),
-                                                                  child: Text(
-                                                                      'Ok'),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        );
-                                                      }
-
-                                                      setState(() {});
-                                                    },
-                                                  ),
-                                                ],
                                               ),
-                                            ],
+                                            ),
                                           ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                                Expanded(
-                                  child: StreamBuilder<
-                                      List<ConsultaResultadoRecord>>(
-                                    stream: queryConsultaResultadoRecord(
-                                      queryBuilder: (consultaResultadoRecord) =>
-                                          consultaResultadoRecord.where(
-                                              'idrefconsulta',
-                                              isEqualTo: widget.idrefconsulta !=
-                                                      null
-                                                  ? widget.idrefconsulta
-                                                  : FFAppState()
-                                                      .geoFireIdRefConsulta),
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: CircularProgressIndicator(
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 5, 10, 5),
+                                          child: FlutterFlowPlacePicker(
+                                            iOSGoogleMapsApiKey: '',
+                                            androidGoogleMapsApiKey: '',
+                                            webGoogleMapsApiKey: '',
+                                            onSelect: (place) async {
+                                              setState(() =>
+                                                  placePickerValue = place);
+                                            },
+                                            defaultText: '',
+                                            icon: Icon(
+                                              Icons.place,
+                                              color: Colors.white,
+                                              size: 20,
+                                            ),
+                                            buttonOptions: FFButtonOptions(
+                                              width: 50,
+                                              height: 50,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryColor,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
                                             ),
                                           ),
-                                        );
-                                      }
-                                      List<ConsultaResultadoRecord>
-                                          containerConsultaResultadoRecordList =
-                                          snapshot.data!;
-                                      return Container(
-                                        width: double.infinity,
-                                        height: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          borderRadius: BorderRadius.only(
-                                            bottomLeft: Radius.circular(0),
-                                            bottomRight: Radius.circular(0),
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 5, 10, 5),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              FFAppState().update(() {
+                                                FFAppState()
+                                                        .geoFireStarLocation =
+                                                    placePickerValue.latLng;
+                                              });
+                                            },
+                                            text: '',
+                                            icon: Icon(
+                                              Icons.save,
+                                              size: 20,
+                                            ),
+                                            options: FFButtonOptions(
+                                              width: 50,
+                                              height: 50,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color: Colors.white,
+                                                      ),
+                                              borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
                                           ),
                                         ),
-                                        child: Visibility(
-                                          visible: (FFAppState()
-                                                      .geoFireStarLocation !=
-                                                  null) &&
-                                              (containerConsultaResultadoRecordList
-                                                      .length >
-                                                  0),
+                                      ],
+                                    ),
+                                  ),
+                                  Text(
+                                    FFAppState().geoFireDistancia > 0.0
+                                        ? '${FFAppState().geoFireDistancia.toString()} KM de circunferência'
+                                        : 'Defina uma distancia...',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                  Slider(
+                                    activeColor: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                    inactiveColor: Color(0xFF9E9E9E),
+                                    min: 0,
+                                    max: 2,
+                                    value: sliderValue ??=
+                                        FFAppState().geoFireDistancia,
+                                    divisions: 20,
+                                    onChanged: (newValue) async {
+                                      newValue = double.parse(
+                                          newValue.toStringAsFixed(4));
+                                      setState(() => sliderValue = newValue);
+                                      var _shouldSetState = false;
+                                      FFAppState().update(() {
+                                        FFAppState().geoFireDistancia =
+                                            sliderValue!;
+                                      });
+                                      if (sliderValue! > 0.0) {
+                                        idRefConsultaSlide =
+                                            await actions.dueulerGeoFireQuery(
+                                          FFAppState().geoFireStarLocation!,
+                                          valueOrDefault<double>(
+                                            functions.strToDouble(FFAppState()
+                                                .geoFireDistancia
+                                                .toString()),
+                                            0.0,
+                                          ),
+                                          'usuarios',
+                                        );
+                                        _shouldSetState = true;
+                                        FFAppState().update(() {
+                                          FFAppState().geoFireIdRefConsulta =
+                                              idRefConsultaSlide;
+                                        });
+
+                                        context.pushNamed(
+                                          'dueuler_geofire',
+                                          queryParams: {
+                                            'idrefconsulta': serializeParam(
+                                              idRefConsultaSlide,
+                                              ParamType.DocumentReference,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+
+                                        if (_shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'Sua posição inicial foi atualizada. Informe uma distancia para continuar.'),
+                                              content: Text(FFAppState()
+                                                  .geoFireStarLocation!
+                                                  .toString()),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      }
+
+                                      if (_shouldSetState) setState(() {});
+                                    },
+                                  ),
+                                  if ((FFAppState().geoFireStarLocation !=
+                                          null) &&
+                                      (FFAppState().geoFireIdRefConsulta !=
+                                          null))
+                                    StreamBuilder<
+                                        List<ConsultaResultadoRecord>>(
+                                      stream: queryConsultaResultadoRecord(
+                                        queryBuilder: (consultaResultadoRecord) =>
+                                            consultaResultadoRecord.where(
+                                                'idrefconsulta',
+                                                isEqualTo: widget
+                                                            .idrefconsulta !=
+                                                        null
+                                                    ? widget.idrefconsulta
+                                                    : FFAppState()
+                                                        .geoFireIdRefConsulta),
+                                      ),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<ConsultaResultadoRecord>
+                                            containerConsultaResultadoRecordList =
+                                            snapshot.data!;
+                                        return Container(
+                                          width: double.infinity,
+                                          height: 300,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(0),
+                                              bottomRight: Radius.circular(0),
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20),
+                                            ),
+                                          ),
                                           child: FlutterFlowGoogleMap(
                                             controller: googleMapsController,
                                             onCameraIdle: (latLng) =>
@@ -667,7 +492,7 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget> {
                                                 GoogleMarkerColor.violet,
                                             mapType: MapType.normal,
                                             style: GoogleMapStyle.standard,
-                                            initialZoom: 14,
+                                            initialZoom: 15,
                                             allowInteraction: true,
                                             allowZoom: true,
                                             showZoomControls: true,
@@ -676,363 +501,13 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget> {
                                             showMapToolbar: false,
                                             showTraffic: false,
                                             centerMapOnMarkerTap: true,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 15, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10, 10, 10, 10),
-                                          child: FlutterFlowPlacePicker(
-                                            iOSGoogleMapsApiKey: '',
-                                            androidGoogleMapsApiKey: '',
-                                            webGoogleMapsApiKey: '',
-                                            onSelect: (place) async {
-                                              setState(() =>
-                                                  placePickerValue2 = place);
-                                            },
-                                            defaultText:
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                              '97jmqt2c' /* Localização */,
-                                            ),
-                                            icon: Icon(
-                                              Icons.place,
-                                              color: Colors.white,
-                                              size: 16,
-                                            ),
-                                            buttonOptions: FFButtonOptions(
-                                              width: 200,
-                                              height: 50,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color: Colors.white,
-                                                      ),
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(12),
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 10, 0),
-                                            child: FlutterFlowDropDown<String>(
-                                              options: [
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'y7dus40h' /* 0.1 */,
-                                                ),
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'vw69pqpz' /* 0.3 */,
-                                                ),
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'bjjgg7yn' /* 0.5 */,
-                                                ),
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  '3vzbday6' /* 1 */,
-                                                ),
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'soxc97f9' /* 5 */,
-                                                ),
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'bttgovq8' /* 10 */,
-                                                ),
-                                                FFLocalizations.of(context)
-                                                    .getText(
-                                                  'qt9iyitb' /* 50 */,
-                                                )
-                                              ],
-                                              onChanged: (val) => setState(
-                                                  () => dropDownValue = val),
-                                              width: 180,
-                                              height: 50,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryBtnText,
-                                                      ),
-                                              hintText:
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'n3rabzuy' /* Distancia */,
-                                              ),
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              elevation: 2,
-                                              borderColor: Colors.transparent,
-                                              borderWidth: 0,
-                                              borderRadius: 12,
-                                              margin: EdgeInsetsDirectional
-                                                  .fromSTEB(12, 4, 12, 4),
-                                              hidesUnderline: true,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                          ).animateOnPageLoad(animationsMap[
+                                              'googleMapOnPageLoadAnimation']!),
+                                        );
+                                      },
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 15, 0, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10, 0, 0, 0),
-                                          child: FFButtonWidget(
-                                            onPressed: () async {
-                                              var _shouldSetState = false;
-                                              if (dropDownValue !=
-                                                  'Distancia') {
-                                                if (FFAppState()
-                                                        .geoFireStarLocation !=
-                                                    null) {
-                                                  retornoIdRefConsulta =
-                                                      await actions
-                                                          .dueulerGeoFireQuery(
-                                                    FFAppState()
-                                                        .geoFireStarLocation!,
-                                                    valueOrDefault<double>(
-                                                      functions.strToDouble(
-                                                          dropDownValue!),
-                                                      0.0,
-                                                    ),
-                                                    'usuarios',
-                                                  );
-                                                  _shouldSetState = true;
-                                                  FFAppState().update(() {
-                                                    FFAppState()
-                                                            .geoFireIdRefConsulta =
-                                                        retornoIdRefConsulta;
-                                                  });
-                                                  await showModalBottomSheet(
-                                                    isScrollControlled: true,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    enableDrag: false,
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return Padding(
-                                                        padding: MediaQuery.of(
-                                                                context)
-                                                            .viewInsets,
-                                                        child: Container(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.7,
-                                                          child:
-                                                              DueuleGeoFireMapWidget(
-                                                            startPosition:
-                                                                FFAppState()
-                                                                    .geoFireStarLocation,
-                                                            idrefconsulta:
-                                                                FFAppState()
-                                                                    .geoFireIdRefConsulta,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ).then((value) =>
-                                                      setState(() {}));
-                                                } else {
-                                                  await showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (alertDialogContext) {
-                                                      return AlertDialog(
-                                                        title: Text('Ops!'),
-                                                        content: Text(
-                                                            'Você deve selecionar uma localização.'),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () =>
-                                                                Navigator.pop(
-                                                                    alertDialogContext),
-                                                            child: Text('Ok'),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  );
-                                                  if (_shouldSetState)
-                                                    setState(() {});
-                                                  return;
-                                                }
-
-                                                await showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'GeoFire pesquisado!'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              }
-                                              if (_shouldSetState)
-                                                setState(() {});
-                                            },
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              '3fcb5aa4' /* Exibir na consulta */,
-                                            ),
-                                            options: FFButtonOptions(
-                                              width: 200,
-                                              height: 40,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color: Colors.white,
-                                                      ),
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  10, 0, 0, 0),
-                                          child: FFButtonWidget(
-                                            onPressed: () async {
-                                              if (FFAppState()
-                                                      .geoFireIdRefConsulta !=
-                                                  null) {
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  enableDrag: false,
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return Padding(
-                                                      padding:
-                                                          MediaQuery.of(context)
-                                                              .viewInsets,
-                                                      child:
-                                                          DueuleGeoFireMapWidget(
-                                                        startPosition: FFAppState()
-                                                            .geoFireStarLocation,
-                                                        idrefconsulta: FFAppState()
-                                                            .geoFireIdRefConsulta,
-                                                      ),
-                                                    );
-                                                  },
-                                                ).then(
-                                                    (value) => setState(() {}));
-                                              } else {
-                                                await showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (alertDialogContext) {
-                                                    return AlertDialog(
-                                                      title: Text(
-                                                          'Realize uma consulta!'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  alertDialogContext),
-                                                          child: Text('Ok'),
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              }
-                                            },
-                                            text: FFLocalizations.of(context)
-                                                .getText(
-                                              'gtzndw8a' /* Ver mapa */,
-                                            ),
-                                            options: FFButtonOptions(
-                                              width: 130,
-                                              height: 40,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color: Colors.white,
-                                                      ),
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  if (FFAppState().geoFireTableUser.length > 0)
+                                  if (FFAppState().geoFireTableUser.length !=
+                                      null)
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 15, 0, 0),
@@ -1041,113 +516,657 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget> {
                                           final listaGeoFire = FFAppState()
                                               .geoFireTableUser
                                               .toList();
-                                          return Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: List.generate(
-                                                listaGeoFire.length,
-                                                (listaGeoFireIndex) {
-                                              final listaGeoFireItem =
-                                                  listaGeoFire[
-                                                      listaGeoFireIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(10, 10, 10, 10),
-                                                child: StreamBuilder<
-                                                    UsuariosRecord>(
-                                                  stream: UsuariosRecord
-                                                      .getDocument(
-                                                          listaGeoFireItem),
-                                                  builder: (context, snapshot) {
-                                                    // Customize what your widget looks like when it's loading.
-                                                    if (!snapshot.hasData) {
-                                                      return Center(
-                                                        child: SizedBox(
-                                                          width: 50,
-                                                          height: 50,
-                                                          child:
-                                                              CircularProgressIndicator(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryColor,
+                                          return SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: List.generate(
+                                                  listaGeoFire.length,
+                                                  (listaGeoFireIndex) {
+                                                final listaGeoFireItem =
+                                                    listaGeoFire[
+                                                        listaGeoFireIndex];
+                                                return Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(10, 10, 10, 10),
+                                                  child: StreamBuilder<
+                                                      UsuariosRecord>(
+                                                    stream: UsuariosRecord
+                                                        .getDocument(
+                                                            listaGeoFireItem),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50,
+                                                            height: 50,
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryColor,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      final containerUsuariosRecord =
+                                                          snapshot.data!;
+                                                      return Container(
+                                                        width: double.infinity,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 4,
+                                                              color: Color(
+                                                                  0x33000000),
+                                                              offset:
+                                                                  Offset(0, 2),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      10,
+                                                                      10,
+                                                                      10,
+                                                                      10),
+                                                          child: Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Text(
+                                                                    containerUsuariosRecord
+                                                                        .nome!,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .title3,
+                                                                  ),
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    children: [
+                                                                      FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            30,
+                                                                        borderWidth:
+                                                                            1,
+                                                                        buttonSize:
+                                                                            60,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .edit_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryColor,
+                                                                          size:
+                                                                              30,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          await googleMapsController
+                                                                              .future
+                                                                              .then(
+                                                                            (c) =>
+                                                                                c.animateCamera(
+                                                                              CameraUpdate.newLatLng(containerUsuariosRecord.local!.toGoogleMaps()),
+                                                                            ),
+                                                                          );
+                                                                          await showModalBottomSheet(
+                                                                            isScrollControlled:
+                                                                                true,
+                                                                            backgroundColor:
+                                                                                Colors.transparent,
+                                                                            enableDrag:
+                                                                                false,
+                                                                            context:
+                                                                                context,
+                                                                            builder:
+                                                                                (context) {
+                                                                              return Padding(
+                                                                                padding: MediaQuery.of(context).viewInsets,
+                                                                                child: Container(
+                                                                                  height: 200,
+                                                                                  child: DueulerEditUsuarioWidget(
+                                                                                    idrefusuario: containerUsuariosRecord.reference,
+                                                                                  ),
+                                                                                ),
+                                                                              );
+                                                                            },
+                                                                          ).then((value) =>
+                                                                              setState(() {}));
+                                                                        },
+                                                                      ),
+                                                                      FlutterFlowIconButton(
+                                                                        borderColor:
+                                                                            Colors.transparent,
+                                                                        borderRadius:
+                                                                            30,
+                                                                        borderWidth:
+                                                                            1,
+                                                                        buttonSize:
+                                                                            60,
+                                                                        icon:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .location_on,
+                                                                          color:
+                                                                              Color(0xFFF01724),
+                                                                          size:
+                                                                              30,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () async {
+                                                                          await googleMapsController
+                                                                              .future
+                                                                              .then(
+                                                                            (c) =>
+                                                                                c.animateCamera(
+                                                                              CameraUpdate.newLatLng(containerUsuariosRecord.local!.toGoogleMaps()),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      containerUsuariosRecord
+                                                                          .endereco!,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyText1
+                                                                          .override(
+                                                                            fontFamily:
+                                                                                'Poppins',
+                                                                            fontWeight:
+                                                                                FontWeight.normal,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ],
                                                           ),
                                                         ),
                                                       );
-                                                    }
-                                                    final containerUsuariosRecord =
-                                                        snapshot.data!;
-                                                    return Container(
-                                                      width: double.infinity,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                            blurRadius: 4,
-                                                            color: Color(
-                                                                0x33000000),
-                                                            offset:
-                                                                Offset(0, 2),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(10,
-                                                                    10, 10, 10),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Text(
-                                                                  containerUsuariosRecord
-                                                                      .nome!,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .title3,
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              children: [
-                                                                Expanded(
-                                                                  child: Text(
-                                                                    containerUsuariosRecord
-                                                                        .endereco!,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Poppins',
-                                                                          fontWeight:
-                                                                              FontWeight.normal,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ),
-                                              );
-                                            }),
-                                          );
+                                                    },
+                                                  ),
+                                                );
+                                              }),
+                                            ),
+                                          ).animateOnPageLoad(animationsMap[
+                                              'columnOnPageLoadAnimation']!);
                                         },
                                       ),
                                     ),
+                                ],
+                              ),
+                            ),
+                            SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  StreamBuilder<List<UsuariosRecord>>(
+                                    stream: queryUsuariosRecord(
+                                      queryBuilder: (usuariosRecord) =>
+                                          usuariosRecord
+                                              .where('status_ativo',
+                                                  isEqualTo: true)
+                                              .orderBy('nome'),
+                                    ),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: CircularProgressIndicator(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      List<UsuariosRecord>
+                                          listViewUsuariosRecordList =
+                                          snapshot.data!;
+                                      return ListView.builder(
+                                        padding: EdgeInsets.zero,
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount:
+                                            listViewUsuariosRecordList.length,
+                                        itemBuilder: (context, listViewIndex) {
+                                          final listViewUsuariosRecord =
+                                              listViewUsuariosRecordList[
+                                                  listViewIndex];
+                                          return Container(
+                                            width: 100,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 30,
+                                                      borderWidth: 1,
+                                                      buttonSize: 60,
+                                                      icon: Icon(
+                                                        Icons
+                                                            .delete_forever_sharp,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        size: 30,
+                                                      ),
+                                                      onPressed: () async {
+                                                        var confirmDialogResponse =
+                                                            await showDialog<
+                                                                    bool>(
+                                                                  context:
+                                                                      context,
+                                                                  builder:
+                                                                      (alertDialogContext) {
+                                                                    return AlertDialog(
+                                                                      title: Text(
+                                                                          'Deseja remover?'),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                          onPressed: () => Navigator.pop(
+                                                                              alertDialogContext,
+                                                                              false),
+                                                                          child:
+                                                                              Text('Não'),
+                                                                        ),
+                                                                        TextButton(
+                                                                          onPressed: () => Navigator.pop(
+                                                                              alertDialogContext,
+                                                                              true),
+                                                                          child:
+                                                                              Text('Remover'),
+                                                                        ),
+                                                                      ],
+                                                                    );
+                                                                  },
+                                                                ) ??
+                                                                false;
+                                                        if (confirmDialogResponse) {
+                                                          await listViewUsuariosRecord
+                                                              .reference
+                                                              .delete();
+                                                        }
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                      .of(context)
+                                                                  .viewInsets,
+                                                              child: Container(
+                                                                height: 200,
+                                                                child:
+                                                                    DueulerEditUsuarioWidget(
+                                                                  idrefusuario:
+                                                                      idrefusuario!
+                                                                          .reference,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            setState(() {}));
+
+                                                        context.pushNamed(
+                                                            'dueuler_geofire');
+                                                      },
+                                                    ),
+                                                    FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 30,
+                                                      borderWidth: 1,
+                                                      buttonSize: 60,
+                                                      icon: Icon(
+                                                        Icons.edit_sharp,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryColor,
+                                                        size: 30,
+                                                      ),
+                                                      onPressed: () async {
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                      .of(context)
+                                                                  .viewInsets,
+                                                              child: Container(
+                                                                height: 200,
+                                                                child:
+                                                                    DueulerEditUsuarioWidget(
+                                                                  idrefusuario:
+                                                                      listViewUsuariosRecord
+                                                                          .reference,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            setState(() {}));
+
+                                                        await showModalBottomSheet(
+                                                          isScrollControlled:
+                                                              true,
+                                                          backgroundColor:
+                                                              Colors
+                                                                  .transparent,
+                                                          enableDrag: false,
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Padding(
+                                                              padding: MediaQuery
+                                                                      .of(context)
+                                                                  .viewInsets,
+                                                              child: Container(
+                                                                height: 200,
+                                                                child:
+                                                                    DueulerEditUsuarioWidget(
+                                                                  idrefusuario:
+                                                                      idrefusuario!
+                                                                          .reference,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          },
+                                                        ).then((value) =>
+                                                            setState(() {}));
+
+                                                        context.pushNamed(
+                                                            'dueuler_geofire');
+                                                      },
+                                                    ),
+                                                    Expanded(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        10,
+                                                                        0,
+                                                                        0,
+                                                                        0),
+                                                            child: Text(
+                                                              listViewUsuariosRecord
+                                                                  .nome!,
+                                                              maxLines: 2,
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Poppins',
+                                                                    fontSize:
+                                                                        16,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                          if (listViewUsuariosRecord
+                                                                  .local !=
+                                                              null)
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10,
+                                                                          0,
+                                                                          0,
+                                                                          0),
+                                                              child: Text(
+                                                                listViewUsuariosRecord
+                                                                    .local!
+                                                                    .toString(),
+                                                                maxLines: 2,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Poppins',
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                    ),
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    FlutterFlowIconButton(
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderRadius: 30,
+                                                      borderWidth: 1,
+                                                      buttonSize: 60,
+                                                      icon: Icon(
+                                                        Icons.my_location_sharp,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        size: 30,
+                                                      ),
+                                                      onPressed: () async {
+                                                        FFAppState().update(() {
+                                                          FFAppState()
+                                                                  .geoFireStarLocation =
+                                                              listViewUsuariosRecord
+                                                                  .local;
+                                                        });
+                                                        FFAppState().update(() {
+                                                          FFAppState()
+                                                                  .geoFireDistancia =
+                                                              valueOrDefault<
+                                                                  double>(
+                                                            sliderValue,
+                                                            1.0,
+                                                          );
+                                                        });
+                                                        idRefCnsultaButton =
+                                                            await actions
+                                                                .dueulerGeoFireQuery(
+                                                          FFAppState()
+                                                              .geoFireStarLocation!,
+                                                          valueOrDefault<
+                                                              double>(
+                                                            functions.strToDouble(
+                                                                FFAppState()
+                                                                    .geoFireDistancia
+                                                                    .toString()),
+                                                            0.0,
+                                                          ),
+                                                          'usuarios',
+                                                        );
+                                                        FFAppState().update(() {
+                                                          FFAppState()
+                                                                  .geoFireIdRefConsulta =
+                                                              idRefCnsultaButton;
+                                                        });
+
+                                                        context.pushNamed(
+                                                          'dueuler_geofire',
+                                                          queryParams: {
+                                                            'idrefconsulta':
+                                                                serializeParam(
+                                                              idRefCnsultaButton,
+                                                              ParamType
+                                                                  .DocumentReference,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+
+                                                        setState(() {});
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            10, 10, 10, 10),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            final usuariosCreateData =
+                                                createUsuariosRecordData(
+                                              nome: 'Nome do Usuario',
+                                              statusAtivo: true,
+                                            );
+                                            var usuariosRecordReference =
+                                                UsuariosRecord.collection.doc();
+                                            await usuariosRecordReference
+                                                .set(usuariosCreateData);
+                                            idrefusuario = UsuariosRecord
+                                                .getDocumentFromData(
+                                                    usuariosCreateData,
+                                                    usuariosRecordReference);
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              enableDrag: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child: Container(
+                                                    height: 200,
+                                                    child:
+                                                        DueulerEditUsuarioWidget(
+                                                      idrefusuario:
+                                                          idrefusuario!
+                                                              .reference,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            ).then((value) => setState(() {}));
+
+                                            context
+                                                .pushNamed('dueuler_geofire');
+
+                                            setState(() {});
+                                          },
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'ucgp1si7' /* Adicionar */,
+                                          ),
+                                          options: FFButtonOptions(
+                                            width: 130,
+                                            height: 40,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily: 'Poppins',
+                                                      color: Colors.white,
+                                                    ),
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 10, 10, 10),
+                                    child: Text(
+                                      FFLocalizations.of(context).getText(
+                                        '1ckd9249' /* Usamos a tabela "usuarios" com... */,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
