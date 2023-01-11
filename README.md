@@ -11,9 +11,9 @@ https://www.youtube.com/@dueuler
 
 <b>Oferecemos serviços personalizados</b>, procuramos solucionar problemas em seus aplicativos ou implementar tecnologias complexas que necessitam de um profissional especializado.
 
-Atendemos por hora:<br>
-   Treinamento pessoal online: <b>R$ 150,00 a hora</b><br>
-   Hora de analiseta de sistema/programador: <b>R$ 100,00 a hora</b><br>
+<b>Atendemos por hora:</b><br>
+--> Treinamento pessoal online: <b>R$ 150,00 a hora</b><br>
+--> Hora de analiseta de sistema/programador: <b>R$ 100,00 a hora</b><br>
    
    *** Valores especiais para quem fechar pacote ou mensalidade.
 
