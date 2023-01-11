@@ -3,10 +3,10 @@
 
 Este projeto foi desenvolvido em FlutterFlow por <b>Euler Magalhães Junior</b>, é esta disponivel para ser acessado e editado via <b>FlutterFlow</b>, para isso solicite acesso ao projeto.
 
-** Para participar do nosso grupo de WhatsApp visite o link abaixo:<br>
+<b>** Para participar do nosso grupo de WhatsApp visite o link abaixo:</b><br>
 https://chat.whatsapp.com/IVaSwd4cSp9LsMVLzSHADv
 
-** Participe dos nossos treinamentos on-line gratuitos pelo YouTube:<br>
+</b>** Participe dos nossos treinamentos on-line gratuitos pelo YouTube:</b><br>
 https://www.youtube.com/@dueuler
 
 <b>Oferecemos serviços personalizados</b>, procuramos solucionar problemas em seus aplicativos ou implementar tecnologias complexas que necessitam de um profissional especializado.
