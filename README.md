@@ -1,31 +1,37 @@
 # Global Library Users
 
-A new Flutter project.
+Este projeto foi desenvolvido em FlutterFlow por Euler Magalhães Junior, é esta disponivel para ser acessado e editado via FlutterFlow, para isso solicite acesso ao projeto.
 
-## Getting Started
+Para participar do nosso grupo de WhatsApp visite o link abaixo:
+https://chat.whatsapp.com/IVaSwd4cSp9LsMVLzSHADv
 
-FlutterFlow projects are built to run on the Flutter _stable_ release.
+Participe dos nossos treinamentos on-line gratuitos pelo YouTube:
+https://www.youtube.com/@dueuler
 
-### IMPORTANT:
+## Começando
 
-For projects with Firestore integration, you must first run the following commands to ensure the project compiles:
+Os projetos do FlutterFlow são criados para serem executados na versão _stable_ do Flutter.
+
+### IMPORTANTE:
+
+Para projetos com integração Firestore, você deve primeiro executar os seguintes comandos para garantir a compilação do projeto:
 
 ```
 flutter pub get
 flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 
-This command creates the generated files that parse each Record from Firestore into a schema object.
+Este comando cria os arquivos gerados que analisam cada registro do Firestore em um objeto de esquema.
 
-### Getting started continued:
+### Introdução continua:
 
-This project is a starting point for a Flutter application.
+Este projeto é um ponto de partida para um aplicativo Flutter.
 
-A few resources to get you started if this is your first Flutter project:
+Alguns recursos para você começar se este for seu primeiro projeto Flutter:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Lab: Escreva seu primeiro aplicativo Flutter](https://flutter.dev/docs/get-started/codelab)
+- [Livro de receitas: amostras úteis do Flutter](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Para obter ajuda para começar a usar o Flutter, consulte nosso
+[documentação online](https://flutter.dev/docs), que oferece tutoriais,
+amostras, orientação sobre desenvolvimento móvel e uma referência completa da API.
