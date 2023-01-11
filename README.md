@@ -35,7 +35,7 @@ O projeto foi criado para ser um guia na criação de objetos e funções rapida
 
 Você precisa configurar uma conta FIREBASE e adicionar a API do GOOGLE MAPS, para executar seu projeto por completo, caso tenha dúvidas de como configurar o Firebase assita nossa aula
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KgMhwFehSD8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://www.youtube.com/watch?v=KgMhwFehSD8
 
 
 
