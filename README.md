@@ -1,23 +1,23 @@
 # Biblioteca de Funções FlutterFLow
 ## by duEuler.com
 
-Este projeto foi desenvolvido em FlutterFlow por Euler Magalhães Junior, é esta disponivel para ser acessado e editado via FlutterFlow, para isso solicite acesso ao projeto.
+Este projeto foi desenvolvido em FlutterFlow por <b>Euler Magalhães Junior</b>, é esta disponivel para ser acessado e editado via <b>FlutterFlow</b>, para isso solicite acesso ao projeto.
 
-Para participar do nosso grupo de WhatsApp visite o link abaixo:
+** Para participar do nosso grupo de WhatsApp visite o link abaixo:<br>
 https://chat.whatsapp.com/IVaSwd4cSp9LsMVLzSHADv
 
-Participe dos nossos treinamentos on-line gratuitos pelo YouTube:
+** Participe dos nossos treinamentos on-line gratuitos pelo YouTube:<br>
 https://www.youtube.com/@dueuler
 
-Oferecemos serviços personalizados a clientes que procuram solucionar problemas em seus aplicativos ou implementar tecnologias complexas que necessitam de um profissiona especializado.
+<b>Oferecemos serviços personalizados</b>, procuramos solucionar problemas em seus aplicativos ou implementar tecnologias complexas que necessitam de um profissional especializado.
 
-Nossos valores por hora:
-   Treinamento pessoal online: R$ 150,00 a hora
-   Hora de analiseta de sistema/programador: R$ 100,00 a hora
+Atendemos por hora:
+   Treinamento pessoal online: <b>R$ 150,00 a hora</b>
+   Hora de analiseta de sistema/programador: <b>R$ 100,00 a hora</b>
    
-   Valores especiais para quem fechar pacote ou mensalidade.
+   *** Valores especiais para quem fechar pacote ou mensalidade.
 
-Entre em contato pelo WhatsApp +55 (37)9 3618-6277 e trate com Euler.
+Entre em contato pelo WhatsApp <b>+55 (37)9 3618-6277</b> e trate com <b>Euler</b>.
 
 ## Começando
 
