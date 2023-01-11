@@ -11,13 +11,14 @@ https://www.youtube.com/@dueuler
 
 <b>Oferecemos serviços personalizados</b>, procuramos solucionar problemas em seus aplicativos ou implementar tecnologias complexas que necessitam de um profissional especializado.
 
-Atendemos por hora:
-   Treinamento pessoal online: <b>R$ 150,00 a hora</b>
-   Hora de analiseta de sistema/programador: <b>R$ 100,00 a hora</b>
+Atendemos por hora:<br>
+   Treinamento pessoal online: <b>R$ 150,00 a hora</b><br>
+   Hora de analiseta de sistema/programador: <b>R$ 100,00 a hora</b><br>
    
    *** Valores especiais para quem fechar pacote ou mensalidade.
 
-Entre em contato pelo WhatsApp <b>+55 (37)9 3618-6277</b> e trate com <b>Euler</b>.
+Entre em contato pelo WhatsApp <b>+55 (37)9 3618-6277</b> e trate com <b>Euler</b>.<br>
+Visite <a href="https://www.dueuler.com">www.duEuler.com</a>
 
 ## Começando
 
