@@ -20,14 +20,24 @@ https://www.youtube.com/@dueuler
 Entre em contato pelo WhatsApp <b>+55 (37)9 3618-6277</b> e trate com <b>Euler</b>.<br>
 <b>Visite <a href="https://www.dueuler.com">www.duEuler.com</a></b>
 
-## Veja a versão online funcionando
+Lembre-se de seguir nosso canal e ativar o sininho para receber as novidades que vamos atualizando.
+https://www.youtube.com/@dueuler
 
-https://app.flutterflow.io/run/Q6EgZoOtxaPxH02r0uOS
+## Veja a versão online funcionando:
 
+https://app.flutterflow.io/run/fMvQNP9JthAsqVrgz3Kx<br>
 
-## Começando
+## Como usar este projeto
 
 Os projetos do FlutterFlow são criados para serem executados na versão _stable_ do Flutter.
+
+O projeto foi criado para ser um guia na criação de objetos e funções rapidas.
+
+Você precisa configurar uma conta FIREBASE e adicionar a API do GOOGLE MAPS, para executar seu projeto por completo, caso tenha dúvidas de como configurar o Firebase assita nossa aula
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KgMhwFehSD8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
 
 ### IMPORTANTE:
 
