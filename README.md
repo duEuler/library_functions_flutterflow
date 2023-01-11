@@ -1,4 +1,4 @@
-# Biblioteca de Funções FlutterFLow
+# Biblioteca de Funções FlutterFlow
 ## by duEuler.com
 
 Este projeto foi desenvolvido em FlutterFlow por <b>Euler Magalhães Junior</b>, é esta disponivel para ser acessado e editado via <b>FlutterFlow</b>, para isso solicite acesso ao projeto.
