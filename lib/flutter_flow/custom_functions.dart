@@ -14,3 +14,7 @@ import '../../auth/auth_util.dart';
 double strToDouble(String valorDouble) {
   return double.parse(valorDouble);
 }
+
+DateTime? strToDate(String? strData) {
+  return DateTime.parse(strData!);
+}

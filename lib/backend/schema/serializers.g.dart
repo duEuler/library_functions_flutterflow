@@ -9,6 +9,7 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ConsultaRecord.serializer)
       ..add(ConsultaResultadoRecord.serializer)
+      ..add(DocumentoRecord.serializer)
       ..add(GaleriaRecord.serializer)
       ..add(GeofireUsuarioStruct.serializer)
       ..add(UsuarioHabitosStruct.serializer)

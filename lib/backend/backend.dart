@@ -9,6 +9,7 @@ import 'schema/usuarios_record.dart';
 import 'schema/galeria_record.dart';
 import 'schema/consulta_record.dart';
 import 'schema/consulta_resultado_record.dart';
+import 'schema/documento_record.dart';
 import 'schema/serializers.dart';
 
 export 'dart:async' show StreamSubscription;
@@ -20,6 +21,7 @@ export 'schema/usuarios_record.dart';
 export 'schema/galeria_record.dart';
 export 'schema/consulta_record.dart';
 export 'schema/consulta_resultado_record.dart';
+export 'schema/documento_record.dart';
 
 /// Functions to query UsuariosRecords (as a Stream and as a Future).
 Future<int> queryUsuariosRecordCount({
@@ -233,6 +235,62 @@ Future<FFFirestorePage<ConsultaResultadoRecord>>
           pageSize: pageSize,
           isStream: isStream,
         );
+
+/// Functions to query DocumentoRecords (as a Stream and as a Future).
+Future<int> queryDocumentoRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      DocumentoRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<DocumentoRecord>> queryDocumentoRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      DocumentoRecord.collection(parent),
+      DocumentoRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<DocumentoRecord>> queryDocumentoRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      DocumentoRecord.collection(parent),
+      DocumentoRecord.serializer,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<FFFirestorePage<DocumentoRecord>> queryDocumentoRecordPage({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  DocumentSnapshot? nextPageMarker,
+  required int pageSize,
+  required bool isStream,
+}) =>
+    queryCollectionPage(
+      DocumentoRecord.collection(parent),
+      DocumentoRecord.serializer,
+      queryBuilder: queryBuilder,
+      nextPageMarker: nextPageMarker,
+      pageSize: pageSize,
+      isStream: isStream,
+    );
 
 Future<int> queryCollectionCount(
   Query collection, {

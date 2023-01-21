@@ -22,6 +22,16 @@ abstract class UsuariosRecord
 
   String? get endereco;
 
+  String? get foto;
+
+  int? get aprovado;
+
+  @BuiltValueField(wireName: 'aprovado_data')
+  DateTime? get aprovadoData;
+
+  @BuiltValueField(wireName: 'aprovado_data_solicitacao')
+  DateTime? get aprovadoDataSolicitacao;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -30,7 +40,9 @@ abstract class UsuariosRecord
     ..nome = ''
     ..habitos = ListBuilder()
     ..statusAtivo = false
-    ..endereco = '';
+    ..endereco = ''
+    ..foto = ''
+    ..aprovado = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('usuarios');
@@ -58,6 +70,10 @@ Map<String, dynamic> createUsuariosRecordData({
   bool? statusAtivo,
   LatLng? local,
   String? endereco,
+  String? foto,
+  int? aprovado,
+  DateTime? aprovadoData,
+  DateTime? aprovadoDataSolicitacao,
 }) {
   final firestoreData = serializers.toFirestore(
     UsuariosRecord.serializer,
@@ -67,7 +83,11 @@ Map<String, dynamic> createUsuariosRecordData({
         ..habitos = null
         ..statusAtivo = statusAtivo
         ..local = local
-        ..endereco = endereco,
+        ..endereco = endereco
+        ..foto = foto
+        ..aprovado = aprovado
+        ..aprovadoData = aprovadoData
+        ..aprovadoDataSolicitacao = aprovadoDataSolicitacao,
     ),
   );
 

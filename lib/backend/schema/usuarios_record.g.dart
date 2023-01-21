@@ -57,6 +57,33 @@ class _$UsuariosRecordSerializer
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.foto;
+    if (value != null) {
+      result
+        ..add('foto')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.aprovado;
+    if (value != null) {
+      result
+        ..add('aprovado')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
+    }
+    value = object.aprovadoData;
+    if (value != null) {
+      result
+        ..add('aprovado_data')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.aprovadoDataSolicitacao;
+    if (value != null) {
+      result
+        ..add('aprovado_data_solicitacao')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -102,6 +129,22 @@ class _$UsuariosRecordSerializer
           result.endereco = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'foto':
+          result.foto = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'aprovado':
+          result.aprovado = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
+          break;
+        case 'aprovado_data':
+          result.aprovadoData = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
+        case 'aprovado_data_solicitacao':
+          result.aprovadoDataSolicitacao = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -127,6 +170,14 @@ class _$UsuariosRecord extends UsuariosRecord {
   @override
   final String? endereco;
   @override
+  final String? foto;
+  @override
+  final int? aprovado;
+  @override
+  final DateTime? aprovadoData;
+  @override
+  final DateTime? aprovadoDataSolicitacao;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsuariosRecord([void Function(UsuariosRecordBuilder)? updates]) =>
@@ -138,6 +189,10 @@ class _$UsuariosRecord extends UsuariosRecord {
       this.statusAtivo,
       this.local,
       this.endereco,
+      this.foto,
+      this.aprovado,
+      this.aprovadoData,
+      this.aprovadoDataSolicitacao,
       this.ffRef})
       : super._();
 
@@ -158,6 +213,10 @@ class _$UsuariosRecord extends UsuariosRecord {
         statusAtivo == other.statusAtivo &&
         local == other.local &&
         endereco == other.endereco &&
+        foto == other.foto &&
+        aprovado == other.aprovado &&
+        aprovadoData == other.aprovadoData &&
+        aprovadoDataSolicitacao == other.aprovadoDataSolicitacao &&
         ffRef == other.ffRef;
   }
 
@@ -166,10 +225,20 @@ class _$UsuariosRecord extends UsuariosRecord {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, nome.hashCode), habitos.hashCode),
-                    statusAtivo.hashCode),
-                local.hashCode),
-            endereco.hashCode),
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc($jc(0, nome.hashCode),
+                                        habitos.hashCode),
+                                    statusAtivo.hashCode),
+                                local.hashCode),
+                            endereco.hashCode),
+                        foto.hashCode),
+                    aprovado.hashCode),
+                aprovadoData.hashCode),
+            aprovadoDataSolicitacao.hashCode),
         ffRef.hashCode));
   }
 
@@ -181,6 +250,10 @@ class _$UsuariosRecord extends UsuariosRecord {
           ..add('statusAtivo', statusAtivo)
           ..add('local', local)
           ..add('endereco', endereco)
+          ..add('foto', foto)
+          ..add('aprovado', aprovado)
+          ..add('aprovadoData', aprovadoData)
+          ..add('aprovadoDataSolicitacao', aprovadoDataSolicitacao)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -212,6 +285,24 @@ class UsuariosRecordBuilder
   String? get endereco => _$this._endereco;
   set endereco(String? endereco) => _$this._endereco = endereco;
 
+  String? _foto;
+  String? get foto => _$this._foto;
+  set foto(String? foto) => _$this._foto = foto;
+
+  int? _aprovado;
+  int? get aprovado => _$this._aprovado;
+  set aprovado(int? aprovado) => _$this._aprovado = aprovado;
+
+  DateTime? _aprovadoData;
+  DateTime? get aprovadoData => _$this._aprovadoData;
+  set aprovadoData(DateTime? aprovadoData) =>
+      _$this._aprovadoData = aprovadoData;
+
+  DateTime? _aprovadoDataSolicitacao;
+  DateTime? get aprovadoDataSolicitacao => _$this._aprovadoDataSolicitacao;
+  set aprovadoDataSolicitacao(DateTime? aprovadoDataSolicitacao) =>
+      _$this._aprovadoDataSolicitacao = aprovadoDataSolicitacao;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -228,6 +319,10 @@ class UsuariosRecordBuilder
       _statusAtivo = $v.statusAtivo;
       _local = $v.local;
       _endereco = $v.endereco;
+      _foto = $v.foto;
+      _aprovado = $v.aprovado;
+      _aprovadoData = $v.aprovadoData;
+      _aprovadoDataSolicitacao = $v.aprovadoDataSolicitacao;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -258,6 +353,10 @@ class UsuariosRecordBuilder
               statusAtivo: statusAtivo,
               local: local,
               endereco: endereco,
+              foto: foto,
+              aprovado: aprovado,
+              aprovadoData: aprovadoData,
+              aprovadoDataSolicitacao: aprovadoDataSolicitacao,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

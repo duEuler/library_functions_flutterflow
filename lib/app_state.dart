@@ -115,6 +115,51 @@ class FFAppState extends ChangeNotifier {
   set cacheGeoFireStart(LatLng? _value) {
     _cacheGeoFireStart = _value;
   }
+
+  String _imageCache = '';
+  String get imageCache => _imageCache;
+  set imageCache(String _value) {
+    _imageCache = _value;
+  }
+
+  DocumentReference? _authDocUsuarioSelecionado;
+  DocumentReference? get authDocUsuarioSelecionado =>
+      _authDocUsuarioSelecionado;
+  set authDocUsuarioSelecionado(DocumentReference? _value) {
+    _authDocUsuarioSelecionado = _value;
+  }
+
+  String _authDocNumeroDocumento = '';
+  String get authDocNumeroDocumento => _authDocNumeroDocumento;
+  set authDocNumeroDocumento(String _value) {
+    _authDocNumeroDocumento = _value;
+  }
+
+  int _apiPHPUsuarioId = 0;
+  int get apiPHPUsuarioId => _apiPHPUsuarioId;
+  set apiPHPUsuarioId(int _value) {
+    _apiPHPUsuarioId = _value;
+  }
+
+  List<dynamic> _apiPHPListaTarefa = [];
+  List<dynamic> get apiPHPListaTarefa => _apiPHPListaTarefa;
+  set apiPHPListaTarefa(List<dynamic> _value) {
+    _apiPHPListaTarefa = _value;
+  }
+
+  void addToApiPHPListaTarefa(dynamic _value) {
+    _apiPHPListaTarefa.add(_value);
+  }
+
+  void removeFromApiPHPListaTarefa(dynamic _value) {
+    _apiPHPListaTarefa.remove(_value);
+  }
+
+  String _apiPHPUsuarioName = '';
+  String get apiPHPUsuarioName => _apiPHPUsuarioName;
+  set apiPHPUsuarioName(String _value) {
+    _apiPHPUsuarioName = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

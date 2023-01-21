@@ -317,11 +317,11 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget>
                                     activeColor: FlutterFlowTheme.of(context)
                                         .primaryColor,
                                     inactiveColor: Color(0xFF9E9E9E),
-                                    min: 0,
+                                    min: 0.1,
                                     max: 2,
                                     value: sliderValue ??=
                                         FFAppState().geoFireDistancia,
-                                    divisions: 20,
+                                    divisions: 19,
                                     onChanged: (newValue) async {
                                       newValue = double.parse(
                                           newValue.toStringAsFixed(4));
@@ -1130,7 +1130,7 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget>
                                           },
                                           text: FFLocalizations.of(context)
                                               .getText(
-                                            'ucgp1si7' /* Adicionar */,
+                                            'y21i2c4v' /* Adicionar */,
                                           ),
                                           options: FFButtonOptions(
                                             width: 130,
@@ -1160,7 +1160,7 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget>
                                         10, 10, 10, 10),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
-                                        '1ckd9249' /* Usamos a tabela "usuarios" com... */,
+                                        'iqkiy2f9' /* Usamos a tabela "usuarios" com... */,
                                       ),
                                       textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)

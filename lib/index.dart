@@ -7,3 +7,7 @@ export 'dueuler_firestore/dueuler_firestore_widget.dart'
     show DueulerFirestoreWidget;
 export 'login/login_widget.dart' show LoginWidget;
 export 'dueuler_geofire/dueuler_geofire_widget.dart' show DueulerGeofireWidget;
+export 'dueuler_uploadfile/dueuler_uploadfile_widget.dart'
+    show DueulerUploadfileWidget;
+export 'dueuler_authdoc/dueuler_authdoc_widget.dart' show DueulerAuthdocWidget;
+export 'dueuler_api/dueuler_api_widget.dart' show DueulerApiWidget;

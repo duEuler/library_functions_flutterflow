@@ -5,6 +5,7 @@ import 'usuarios_record.dart';
 import 'galeria_record.dart';
 import 'consulta_record.dart';
 import 'consulta_resultado_record.dart';
+import 'documento_record.dart';
 
 import 'index.dart';
 
@@ -19,6 +20,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   GaleriaRecord,
   ConsultaRecord,
   ConsultaResultadoRecord,
+  DocumentoRecord,
   UsuarioHabitosStruct,
   GeofireUsuarioStruct,
 ])

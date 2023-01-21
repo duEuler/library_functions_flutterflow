@@ -254,6 +254,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Geo Fire',
       'en': '',
     },
+    'srymxno9': {
+      'pt': 'Upload File Server',
+      'en': '',
+    },
+    '2ifmiv9m': {
+      'pt': 'Auth Documents',
+      'en': '',
+    },
+    'lzuf596p': {
+      'pt': 'API - PHP',
+      'en': '',
+    },
     'eo1bso5d': {
       'pt': 'duEuler.com',
       'en': '',
@@ -323,6 +335,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Entra com Google',
       'en': 'Sign in with Google',
     },
+    'tc2g9ua2': {
+      'pt': 'Home Page',
+      'en': '',
+    },
     '87nlg9qo': {
       'pt': 'by duEuler.com',
       'en': '',
@@ -346,11 +362,11 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'Tabela',
       'en': '',
     },
-    'ucgp1si7': {
+    'y21i2c4v': {
       'pt': 'Adicionar',
       'en': '',
     },
-    '1ckd9249': {
+    'iqkiy2f9': {
       'pt':
           'Usamos a tabela \"usuarios\" como modelo de uso para o GeoFire. Você precisa cadastrar endereços próximos para ativar o filtro. \n\nUse o botão preto para definir o centro do mapa, este endereço será usado para realizar a busca do raio.\n\nVocê pode definir um endereço especifico na página GeoFirePoints usando o Place, em seguida clique no disquete para salvar a posição.',
       'en': '',
@@ -360,6 +376,123 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': '',
     },
     '37a3dgob': {
+      'pt': 'Home',
+      'en': '',
+    },
+  },
+  // dueuler_uploadfile
+  {
+    '937jrxup': {
+      'pt': 'Upload file server',
+      'en': '',
+    },
+    'n3hln93b': {
+      'pt': 'Sua assinatura',
+      'en': '',
+    },
+    'l8sl34vg': {
+      'pt': 'Upload image',
+      'en': '',
+    },
+    'dcjnz6cn': {
+      'pt': 'Picker file',
+      'en': '',
+    },
+    'osjm50xm': {
+      'pt': 'Home',
+      'en': '',
+    },
+  },
+  // dueuler_authdoc
+  {
+    '44y01kaa': {
+      'pt': 'Auth Documents',
+      'en': '',
+    },
+    'czirk2n6': {
+      'pt': 'Lista de Usuários',
+      'en': '',
+    },
+    '938g86kb': {
+      'pt': 'Aprovado',
+      'en': '',
+    },
+    'e6ko4uq9': {
+      'pt': 'Aprovar',
+      'en': '',
+    },
+    '4432j9me': {
+      'pt': 'Auth',
+      'en': '',
+    },
+    'qeijzlut': {
+      'pt': 'Nenhum documento aprovado!',
+      'en': '',
+    },
+    'vchqwx85': {
+      'pt': 'Enviar documentos',
+      'en': '',
+    },
+    'w7ukikrx': {
+      'pt': 'Aguardando aprovação!',
+      'en': '',
+    },
+    'vlzppcyu': {
+      'pt': 'Documentos aprovados:',
+      'en': '',
+    },
+    '773182ue': {
+      'pt': 'Home',
+      'en': '',
+    },
+  },
+  // dueuler_api
+  {
+    '70nlgn25': {
+      'pt': 'Efetue o login no arquivo PHP',
+      'en': '',
+    },
+    '9c8p3ed6': {
+      'pt': 'E-mail',
+      'en': '',
+    },
+    'rqgvpqbu': {
+      'pt': 'teste@teste.com',
+      'en': '',
+    },
+    '3uc68asq': {
+      'pt': 'Senha',
+      'en': '',
+    },
+    'ekaydk5r': {
+      'pt': '123456',
+      'en': '',
+    },
+    '1tjwbk7v': {
+      'pt': 'Conectar',
+      'en': '',
+    },
+    '1cvjflpi': {
+      'pt': 'Tarefa',
+      'en': '',
+    },
+    'e5sazwm9': {
+      'pt': 'Data',
+      'en': '',
+    },
+    'qdkntz38': {
+      'pt': '...',
+      'en': '',
+    },
+    'ecvh2j0c': {
+      'pt': 'Adicionar',
+      'en': '',
+    },
+    '2moinzxu': {
+      'pt': 'API - PHP',
+      'en': '',
+    },
+    '2xm21c53': {
       'pt': 'Home',
       'en': '',
     },
@@ -387,6 +520,154 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'hbxyduw0': {
       'pt': 'Localizar endereço...',
+      'en': '',
+    },
+  },
+  // dueulerSendAuthDoc
+  {
+    '4lreadie': {
+      'pt': 'Tipo de documento',
+      'en': '',
+    },
+    'ct8ifeem': {
+      'pt': 'CPF',
+      'en': '',
+    },
+    'qkzckwlk': {
+      'pt': 'CPF',
+      'en': '',
+    },
+    '1wb0d328': {
+      'pt': 'CNPJ',
+      'en': '',
+    },
+    'cci7lrzj': {
+      'pt': 'CNH',
+      'en': '',
+    },
+    '95otut6t': {
+      'pt': 'RG',
+      'en': '',
+    },
+    '0mj5iqbz': {
+      'pt': 'Documento...',
+      'en': '',
+    },
+    'gv8xd2hw': {
+      'pt': 'N° DOCUMENTO',
+      'en': '',
+    },
+    '9ojig0r4': {
+      'pt': '000.000.000-00',
+      'en': '',
+    },
+    '1u1ipj3t': {
+      'pt': 'N° DOCUMENTO',
+      'en': '',
+    },
+    'tmmgab4g': {
+      'pt': '00.000.000/0000-00',
+      'en': '',
+    },
+    '24lcaxrk': {
+      'pt': 'N° DO REGISTRO',
+      'en': '',
+    },
+    'khz90v3e': {
+      'pt': 'N° DOCUMENTO',
+      'en': '',
+    },
+    'g101c0k2': {
+      'pt':
+          'Digite o documento corretamente, pois o mesmo será conferido com a foto enviada.',
+      'en': '',
+    },
+    'tww7t2dp': {
+      'pt': 'Continuar',
+      'en': '',
+    },
+    'vw63bds6': {
+      'pt': 'Imagem da frente',
+      'en': '',
+    },
+    'x6tzixnu': {
+      'pt':
+          'Confira se a imagem esta visivel para leitura, você pode tirar outra foto antes de continuar.',
+      'en': '',
+    },
+    'sw6bakn3': {
+      'pt': 'Tirar foto',
+      'en': '',
+    },
+    'mnuxr6o6': {
+      'pt': 'Continuar',
+      'en': '',
+    },
+    's96tko6l': {
+      'pt': 'Imagem do verso',
+      'en': '',
+    },
+    'fjwn93w5': {
+      'pt':
+          'Confira se a imagem esta visivel para leitura, você pode tirar outra foto antes de continuar.',
+      'en': '',
+    },
+    'kb3zy1sc': {
+      'pt': 'Tirar foto',
+      'en': '',
+    },
+    '3xhf4b0y': {
+      'pt': 'Continuar',
+      'en': '',
+    },
+    'qgwjdp4j': {
+      'pt': 'Assinatura digital',
+      'en': '',
+    },
+    'bbt1bads': {
+      'pt': 'Escreva sua assinatura digital no quadroa cima.',
+      'en': '',
+    },
+    'qyvw3xxi': {
+      'pt': 'Enviar documentos',
+      'en': '',
+    },
+  },
+  // apiPHPEditarTarefa
+  {
+    'frnqgnqa': {
+      'pt': 'Editar Tarefa',
+      'en': '',
+    },
+    'kkdqlxip': {
+      'pt': 'Tarefa',
+      'en': '',
+    },
+    'r7q5su4h': {
+      'pt': 'Tarefa',
+      'en': '',
+    },
+    'wn737pba': {
+      'pt': 'Anexar foto',
+      'en': '',
+    },
+    'd67m7j79': {
+      'pt': 'Salvar',
+      'en': '',
+    },
+  },
+  // Miscellaneous
+  {
+    'k1ytj4lr': {
+      'pt': '',
+      'en': '',
+    },
+    'x2qerml6': {
+      'pt': '',
+      'en': '',
+    },
+    'v3t5kbt0': {
+      'pt': 'Você autorizar acessar seu arquivos?',
       'en': '',
     },
   },

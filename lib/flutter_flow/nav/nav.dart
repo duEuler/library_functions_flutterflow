@@ -109,6 +109,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 idrefconsulta: params.getParam('idrefconsulta',
                     ParamType.DocumentReference, false, ['consulta']),
               ),
+            ),
+            FFRoute(
+              name: 'dueuler_uploadfile',
+              path: 'dueulerUploadfile',
+              builder: (context, params) => DueulerUploadfileWidget(),
+            ),
+            FFRoute(
+              name: 'dueuler_authdoc',
+              path: 'dueulerAuthdoc',
+              builder: (context, params) => DueulerAuthdocWidget(
+                pageIndex: params.getParam('pageIndex', ParamType.int),
+              ),
+            ),
+            FFRoute(
+              name: 'dueuler_api',
+              path: 'dueulerApi',
+              builder: (context, params) => DueulerApiWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

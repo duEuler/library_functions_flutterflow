@@ -133,6 +133,31 @@ class _LoginWidgetState extends State<LoginWidget> {
                 ),
               ),
               Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    context.pushNamed('HomePage');
+                  },
+                  text: FFLocalizations.of(context).getText(
+                    'tc2g9ua2' /* Home Page */,
+                  ),
+                  options: FFButtonOptions(
+                    width: 130,
+                    height: 40,
+                    color: FlutterFlowTheme.of(context).primaryColor,
+                    textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                        ),
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
+              Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                 child: Text(
                   FFLocalizations.of(context).getText(
