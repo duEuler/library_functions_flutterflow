@@ -266,6 +266,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'API - PHP',
       'en': '',
     },
+    '5w2jhd9k': {
+      'pt': 'API - Via Cep',
+      'en': '',
+    },
     'eo1bso5d': {
       'pt': 'duEuler.com',
       'en': '',
@@ -373,6 +377,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '7t1h26mg': {
       'pt': 'Geo Fire',
+      'en': '',
+    },
+    'el079tb1': {
+      'pt': '',
       'en': '',
     },
     '37a3dgob': {
@@ -492,7 +500,282 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'pt': 'API - PHP',
       'en': '',
     },
+    'du4wx2t6': {
+      'pt': '',
+      'en': '',
+    },
     '2xm21c53': {
+      'pt': 'Home',
+      'en': '',
+    },
+  },
+  // dueuler_api_viacep
+  {
+    'r2o4qzwj': {
+      'pt': 'API - VIA CEP',
+      'en': '',
+    },
+    'g2cua31a': {
+      'pt': '',
+      'en': '',
+    },
+    'f29b907n': {
+      'pt': 'Buscar Endereço',
+      'en': '',
+    },
+    '2j3am5j3': {
+      'pt': 'Consulte o endereço pelo seu CEP',
+      'en': '',
+    },
+    'jgjtrd6g': {
+      'pt': 'CEP',
+      'en': '',
+    },
+    '2lnhsk98': {
+      'pt': 'CEP',
+      'en': '',
+    },
+    '4495x056': {
+      'pt': '30130167',
+      'en': '',
+    },
+    'tlof8l84': {
+      'pt': 'CONSULTAR',
+      'en': '',
+    },
+    'd3lyrxae': {
+      'pt': 'CEP:',
+      'en': '',
+    },
+    'a3ztpd9b': {
+      'pt': 'Logradouro:',
+      'en': '',
+    },
+    'dponnool': {
+      'pt': 'Complemento:',
+      'en': '',
+    },
+    'pfhhhsx2': {
+      'pt': 'Bairro:',
+      'en': '',
+    },
+    'qgerom9p': {
+      'pt': 'Localidade',
+      'en': '',
+    },
+    '4rdgotpa': {
+      'pt': 'UF:',
+      'en': '',
+    },
+    'hd7iv4v1': {
+      'pt': 'IBGE:',
+      'en': '',
+    },
+    'h850ol6b': {
+      'pt': 'GIA:',
+      'en': '',
+    },
+    'r2nlnvi5': {
+      'pt': 'DDD:',
+      'en': '',
+    },
+    'lm3omtu9': {
+      'pt': 'SIAFI:',
+      'en': '',
+    },
+    'oktcusyz': {
+      'pt': 'Buscar Lista de Cep',
+      'en': '',
+    },
+    'djns2mg4': {
+      'pt': 'Localize o seu CEP, pelo seu endereço.',
+      'en': '',
+    },
+    'h2n1rswi': {
+      'pt': 'MG',
+      'en': '',
+    },
+    '1aophjiv': {
+      'pt': 'AC',
+      'en': '',
+    },
+    'jku3drtk': {
+      'pt': 'AL',
+      'en': '',
+    },
+    'j7trsqt8': {
+      'pt': 'AP',
+      'en': '',
+    },
+    '99vft1q7': {
+      'pt': 'AM',
+      'en': '',
+    },
+    'mfof86vf': {
+      'pt': 'BA',
+      'en': '',
+    },
+    'c8vto24w': {
+      'pt': 'CE',
+      'en': '',
+    },
+    'up8kxgao': {
+      'pt': 'DF',
+      'en': '',
+    },
+    '1pfy1c07': {
+      'pt': 'ES',
+      'en': '',
+    },
+    'crfzawfv': {
+      'pt': 'GO',
+      'en': '',
+    },
+    'sqo4lszb': {
+      'pt': 'MA',
+      'en': '',
+    },
+    'xjbswusw': {
+      'pt': 'MT',
+      'en': '',
+    },
+    'k82z5nph': {
+      'pt': 'MS',
+      'en': '',
+    },
+    'fsnio79s': {
+      'pt': 'MG',
+      'en': '',
+    },
+    'aeqfzhsq': {
+      'pt': 'PA',
+      'en': '',
+    },
+    '18t9h0nr': {
+      'pt': 'PB',
+      'en': '',
+    },
+    'mdzetwu1': {
+      'pt': 'PR',
+      'en': '',
+    },
+    'q93q470l': {
+      'pt': 'PE',
+      'en': '',
+    },
+    'ofafi8kl': {
+      'pt': 'PI',
+      'en': '',
+    },
+    '747739lx': {
+      'pt': 'RJ',
+      'en': '',
+    },
+    'fib44i34': {
+      'pt': 'RN',
+      'en': '',
+    },
+    'bumgu6yp': {
+      'pt': 'RS',
+      'en': '',
+    },
+    'yt1jsuti': {
+      'pt': 'RO',
+      'en': '',
+    },
+    'x4u58v6p': {
+      'pt': 'RR',
+      'en': '',
+    },
+    '5ukxbupd': {
+      'pt': 'SC',
+      'en': '',
+    },
+    'cseiko1q': {
+      'pt': 'SP',
+      'en': '',
+    },
+    'rk3raq3l': {
+      'pt': 'SE',
+      'en': '',
+    },
+    'zkiaoec6': {
+      'pt': 'TO',
+      'en': '',
+    },
+    '85yc3vza': {
+      'pt': 'Estado',
+      'en': '',
+    },
+    'nfpqcciy': {
+      'pt': 'Cidade',
+      'en': '',
+    },
+    'k28mouhc': {
+      'pt': 'Cidade',
+      'en': '',
+    },
+    'ocyqyczx': {
+      'pt': 'Belo Horizonte',
+      'en': '',
+    },
+    'xyt1r40c': {
+      'pt': 'Rua',
+      'en': '',
+    },
+    'du59x5ip': {
+      'pt': 'Rua',
+      'en': '',
+    },
+    'zzjwyzvx': {
+      'pt': 'Rua Alagoas',
+      'en': '',
+    },
+    'uc6mryxj': {
+      'pt': 'Consultar',
+      'en': '',
+    },
+    '0jt8fj13': {
+      'pt': 'CEP:',
+      'en': '',
+    },
+    'woakevsg': {
+      'pt': 'Logradouro:',
+      'en': '',
+    },
+    'i2aljzwz': {
+      'pt': 'Complemento:',
+      'en': '',
+    },
+    '2dcznel1': {
+      'pt': 'Bairro:',
+      'en': '',
+    },
+    'i53du6a3': {
+      'pt': 'Localidade',
+      'en': '',
+    },
+    'm1qppcyh': {
+      'pt': 'UF:',
+      'en': '',
+    },
+    'lx0af90t': {
+      'pt': 'IBGE:',
+      'en': '',
+    },
+    'rnbuuclv': {
+      'pt': 'GIA:',
+      'en': '',
+    },
+    'kz29j6a3': {
+      'pt': 'DDD:',
+      'en': '',
+    },
+    '14pmzry7': {
+      'pt': 'SIAFI:',
+      'en': '',
+    },
+    '7a55lhrj': {
       'pt': 'Home',
       'en': '',
     },
@@ -653,6 +936,57 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'd67m7j79': {
       'pt': 'Salvar',
+      'en': '',
+    },
+  },
+  // apiVIACEPConfirmEndereco
+  {
+    'l8dd6ml0': {
+      'pt': 'Endereço encontrado:',
+      'en': '',
+    },
+    '0hdzvv9w': {
+      'pt': 'CEP:',
+      'en': '',
+    },
+    'boixrvbl': {
+      'pt': 'Logradouro:',
+      'en': '',
+    },
+    'mj6z3wmc': {
+      'pt': 'Complemento:',
+      'en': '',
+    },
+    'pjuhywb8': {
+      'pt': 'Bairro:',
+      'en': '',
+    },
+    'r80i80cc': {
+      'pt': 'Localidade',
+      'en': '',
+    },
+    'mux52n5r': {
+      'pt': 'UF:',
+      'en': '',
+    },
+    'd6vh83qg': {
+      'pt': 'IBGE:',
+      'en': '',
+    },
+    'ljxbjdzb': {
+      'pt': 'GIA:',
+      'en': '',
+    },
+    '9fgaeek3': {
+      'pt': 'DDD:',
+      'en': '',
+    },
+    'xk2il46n': {
+      'pt': 'SIAFI:',
+      'en': '',
+    },
+    'o9u515vo': {
+      'pt': 'Endereço esta correto ?',
       'en': '',
     },
   },

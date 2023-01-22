@@ -10,3 +10,4 @@ export 'dueuler_download_file.dart' show dueulerDownloadFile;
 export 'dueuler_firebase_get_doc_in_record.dart'
     show dueulerFirebaseGetDocInRecord;
 export 'dueuler_file_picker.dart' show dueulerFilePicker;
+export 'dueuler_get_lat_lng_from_address.dart' show dueulerGetLatLngFromAddress;

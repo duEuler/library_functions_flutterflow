@@ -147,6 +147,60 @@ class InsertTarefaCall {
 
 /// End PHP Group Code
 
+/// Start VIACEP Group Code
+
+class ViacepGroup {
+  static String baseUrl = 'https://viacep.com.br/ws/';
+  static Map<String, String> headers = {};
+  static GetEnderecoCall getEnderecoCall = GetEnderecoCall();
+  static GetListaCepPorEnderecoCall getListaCepPorEnderecoCall =
+      GetListaCepPorEnderecoCall();
+}
+
+class GetEnderecoCall {
+  Future<ApiCallResponse> call({
+    String? cep = '38900000',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getEndereco',
+      apiUrl: '${ViacepGroup.baseUrl}${cep}/json',
+      callType: ApiCallType.GET,
+      headers: {
+        ...ViacepGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetListaCepPorEnderecoCall {
+  Future<ApiCallResponse> call({
+    String? uf = '',
+    String? city = '',
+    String? andress = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getListaCepPorEndereco',
+      apiUrl: '${ViacepGroup.baseUrl}${uf}/${city}/${andress}/json',
+      callType: ApiCallType.GET,
+      headers: {
+        ...ViacepGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+/// End VIACEP Group Code
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

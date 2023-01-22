@@ -69,13 +69,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : LoginWidget(),
+          appStateNotifier.loggedIn ? DueulerStartWidget() : LoginWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : LoginWidget(),
+              appStateNotifier.loggedIn ? DueulerStartWidget() : LoginWidget(),
           routes: [
             FFRoute(
               name: 'HomePage',
@@ -126,6 +126,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'dueuler_api',
               path: 'dueulerApi',
               builder: (context, params) => DueulerApiWidget(),
+            ),
+            FFRoute(
+              name: 'dueuler_api_viacep',
+              path: 'dueulerApiViacep',
+              builder: (context, params) => DueulerApiViacepWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

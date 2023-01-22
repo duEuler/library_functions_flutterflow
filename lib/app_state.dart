@@ -160,6 +160,26 @@ class FFAppState extends ChangeNotifier {
   set apiPHPUsuarioName(String _value) {
     _apiPHPUsuarioName = _value;
   }
+
+  dynamic _apiVIACEPResultado;
+  dynamic get apiVIACEPResultado => _apiVIACEPResultado;
+  set apiVIACEPResultado(dynamic _value) {
+    _apiVIACEPResultado = _value;
+  }
+
+  List<dynamic> _apiVIACEPLista = [];
+  List<dynamic> get apiVIACEPLista => _apiVIACEPLista;
+  set apiVIACEPLista(List<dynamic> _value) {
+    _apiVIACEPLista = _value;
+  }
+
+  void addToApiVIACEPLista(dynamic _value) {
+    _apiVIACEPLista.add(_value);
+  }
+
+  void removeFromApiVIACEPLista(dynamic _value) {
+    _apiVIACEPLista.remove(_value);
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

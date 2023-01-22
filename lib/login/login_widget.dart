@@ -86,7 +86,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               return;
                             }
 
-                            context.goNamedAuth('HomePage', mounted);
+                            context.goNamedAuth('dueuler_start', mounted);
                           },
                           text: FFLocalizations.of(context).getText(
                             'po50ryac' /* Entra com Google */,

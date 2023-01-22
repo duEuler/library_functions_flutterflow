@@ -11,3 +11,5 @@ export 'dueuler_uploadfile/dueuler_uploadfile_widget.dart'
     show DueulerUploadfileWidget;
 export 'dueuler_authdoc/dueuler_authdoc_widget.dart' show DueulerAuthdocWidget;
 export 'dueuler_api/dueuler_api_widget.dart' show DueulerApiWidget;
+export 'dueuler_api_viacep/dueuler_api_viacep_widget.dart'
+    show DueulerApiViacepWidget;

@@ -17,6 +17,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -138,19 +139,54 @@ class _DueulerGeofireWidgetState extends State<DueulerGeofireWidget>
               ),
         ),
         actions: [
-          FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30,
-            borderWidth: 1,
-            buttonSize: 60,
-            icon: Icon(
-              Icons.refresh_outlined,
-              color: FlutterFlowTheme.of(context).primaryBtnText,
-              size: 30,
-            ),
-            onPressed: () async {
-              context.pushNamed('dueuler_geofire');
-            },
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              FFButtonWidget(
+                onPressed: () async {
+                  await launchURL(
+                      'https://www.youtube.com/watch?v=A_4IYp8-p7g&t=126s');
+                },
+                text: FFLocalizations.of(context).getText(
+                  'el079tb1' /*  */,
+                ),
+                icon: FaIcon(
+                  FontAwesomeIcons.youtube,
+                ),
+                options: FFButtonOptions(
+                  height: 40,
+                  color: Color(0xFFE30004),
+                  textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                        fontFamily: 'Poppins',
+                        color: FlutterFlowTheme.of(context).primaryBtnText,
+                      ),
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(15),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(0),
+                  ),
+                ),
+              ),
+              FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: Icon(
+                  Icons.refresh_outlined,
+                  color: FlutterFlowTheme.of(context).primaryBtnText,
+                  size: 30,
+                ),
+                onPressed: () async {
+                  context.pushNamed('dueuler_geofire');
+                },
+              ),
+            ],
           ),
         ],
         centerTitle: false,
